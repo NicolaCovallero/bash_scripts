@@ -10,7 +10,6 @@ alias touchpad_enabled='xinput set-prop 13 "Device Enabled" 1'
 alias touchpad_disabled='xinput set-prop 13 "Device Enabled" 0'
 alias init_rasp='~/scripts/init_rasp.sh'
 alias access_rasp='ssh pi@192.168.1.3'
-alias scan_wifi='sudo arp-scan -l --interface=wlan0'
 alias scan_eth='sudo arp-scan -l --interface=eth0'
 alias my_qt_creator='sudo qtcreator -stylesheet=/home/nicola/qt-creator/themes/Qt-Creator-Darcula/darcula.css'
 alias ipy_notebook='ipython notebook -pylab inline'
@@ -55,4 +54,14 @@ gcc_compile_(){
 	echo "command = $command$"
 	echo
 	$command
+}
+
+scan_wifi(){
+	echo "To check the correct interface run the command: ifconfig"
+	if [ $# -eq 0 ]
+	then
+		sudo arp-scan -l --interface=wlp2s0
+	else
+		sudo arp-scan -l --interface="$1"
+	fi
 }
